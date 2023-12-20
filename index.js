@@ -9,7 +9,7 @@ const dotenv = require('dotenv');
 dotenv.config({ path: './.env' });
 
 //Middlewares
-app.use(bodyParser.json());
+app.use(bodyParser.json({ limit: '50mb' }));
 app.use(cookieParser());
 app.use(cors());
 
