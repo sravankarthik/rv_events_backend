@@ -4,8 +4,9 @@ const bodyParser = require('body-parser')
 const app = express()
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
+const dotenv = require('dotenv');
 
-require('dotenv').config();
+dotenv.config({ path: './.env' });
 
 //Middlewares
 app.use(bodyParser.json());
@@ -20,8 +21,8 @@ app.use("/api", userRoutes);
 app.use("/api", eventRoutes);
 
 //DB connection
-const port = 8000
-mongoose.connect('mongodb+srv://test:test@cluster0.y7khmp3.mongodb.net/?retryWrites=true&w=majority')
+const port = process.env.PORT || 8000
+mongoose.connect(process.env.BACKEND)
     .then(() => { console.log("DB connected...") });
 //Server connection
 app.listen(port, () => {
